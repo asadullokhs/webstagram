@@ -2,15 +2,18 @@ import { createContext, useContext, useState } from "react";
 
 const InfoContext = createContext();
 
-export const useInfoCotext = () => useContext(InfoContext);
+export const useInfoContext = () => useContext(InfoContext);
 
 export const InfoProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState( null
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("profile") || null)
   );
 
-  const [onlineUsers, setOnliseUsers] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [chats, setChats] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
 
-  const exits = () => {
+  const exit = () => {
     localStorage.clear();
     setCurrentUser(null);
   };
@@ -18,9 +21,13 @@ export const InfoProvider = ({ children }) => {
   const value = {
     currentUser,
     setCurrentUser,
-    exits,
+    exit,
     onlineUsers,
-    setOnliseUsers,
+    setOnlineUsers,
+    chats,
+    setChats,
+    currentChat,
+    setCurrentChat,
   };
 
   return (

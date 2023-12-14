@@ -6,7 +6,7 @@
   --profileShadow: 0px 4px 17px 2px rgba(0, 0, 0, 0.25);
   --hrColor: #cfcdcd;
   --cardColor: rgba(238, 243, 247, 0.445);
-  --buttonBg: linear-gradient(98.63deg, #25cff9 0%, #0ca3c9 50%, #0d3fac 100%);
+  --buttonBg: linear-gradient(315deg, #55efc4 0%, green 74%);
   --inputColor: rgba(8, 15, 85, 0.07);  
 }
 
@@ -24,14 +24,14 @@
   max-height: 210px;
   height: 100%;
   border-radius: 50%;
-  background-color: #abddf0;
+  background-color: #abf0c5d8;
   filter: blur(72px);
   top: 10%;
   right: 10%;
   z-index: -1;
 }
 
-.blur:nth-child(2){
+.blur-2{
   top: 56%;
   left: 10%;
 }

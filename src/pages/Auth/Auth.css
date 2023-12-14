@@ -88,6 +88,11 @@
   font-size: 12px;
   cursor: pointer;
   text-decoration: underline;
+  color: #247a45d8;
+}
+
+.outline-danger{
+  outline: 2px solid red;
 }
 
 .confirm-span {
