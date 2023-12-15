@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ChatBox.css";
 import { useInfoContext } from "../../context/Context";
 import { getUser } from "../../api/userRequests";
 import profile from "../../images/default-profile.jpg";
 import { getMessages } from "../../api/messageRequests";
+import { format } from "timeago.js";
+import InputEmoji from "react-input-emoji";
 
 const ChatBox = () => {
   const { currentUser, currentChat, exit } = useInfoContext();
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
+
+  const imageRef = useRef();
 
   const userId = currentChat?.members?.find((id) => id !== currentUser._id);
 
@@ -34,6 +38,7 @@ const ChatBox = () => {
         const { data } = await getMessages(currentChat._id);
 
         setMessages(data.messages);
+        console.log(data);
       } catch (error) {
         if (error.response.data.message === "jwt expired") {
           exit();
@@ -64,7 +69,35 @@ const ChatBox = () => {
         </h3>
       </div>
       <hr />
-      <h1>Chat</h1>
+
+      <div className="chat-body">
+        {messages?.map((message) => {
+          return (
+            <div
+              key={message._id}
+              className={
+                message?.senderId === currentUser._id
+                  ? "message own"
+                  : "message"
+              }
+            >
+              <span className="message-text">{message?.text}</span>
+              <span className="message-date">{format(message?.createdAt)}</span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="chat-sender">
+        <div className="sender-file-btn button fa-solid fa-file"></div>
+        <InputEmoji />
+        <button className="send-btn button fa-solid fa-paper-plane"></button>
+        <input
+          ref={imageRef}
+          name="image"
+          type="file"
+          className="message-file-input"
+        />
+      </div>
     </div>
   );
 };

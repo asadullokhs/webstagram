@@ -5,3 +5,54 @@
     gap: 50px;
     margin-bottom: 10px;
 }
+
+.message{
+    padding: 5px ;
+    width: 80%;
+    border-radius: 10px 10px 10px 0;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(216, 216, 216);
+    border: 1px solid gray;
+}
+
+.message-date{
+    align-self: flex-end;
+    font-size: 10px;
+}
+
+.own{
+    border-radius: 10px 10px 0 10px;
+    margin-left: auto;
+    border: 1px solid green;
+    background-color:#33e050;
+}
+
+.chat-body{
+    padding-top: 10px;
+    height: 73vh;
+}
+
+.chat-sender{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: space-between;
+}
+
+.sender-file-btn{
+    padding: 5px 15px;
+    background: #33e050;
+    border: 1px solid gray;
+}
+
+.send-btn{
+    padding: 10px 15px;
+    background: #33e050;
+    border: 1px solid gray;
+}
+
+.message-file-input{
+    display: none;
+}
