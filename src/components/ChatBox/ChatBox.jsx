@@ -8,8 +8,8 @@ import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 
 const ChatBox = () => {
-  const { currentUser, currentChat, exit } = useInfoContext();
-  const [userData, setUserData] = useState(null);
+  const { currentUser, currentChat, exit, setOpen, userData, setUserData } =
+    useInfoContext();
   const [messages, setMessages] = useState([]);
 
   const imageRef = useRef();
@@ -56,6 +56,9 @@ const ChatBox = () => {
       <div className="user-info">
         <img
           className="profile-img"
+          onClick={() => {
+            setOpen(true);
+          }}
           src={
             userData?.profilePicture
               ? `http://localhost:4002/${userData?.profilePicture}`

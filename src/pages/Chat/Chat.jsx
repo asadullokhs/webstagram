@@ -8,11 +8,19 @@ import { useEffect } from "react";
 import { getUserChats } from "../../api/chatRequests";
 import Conversation from "../../components/Conversation/Conversation";
 import ChatBox from "../../components/ChatBox/ChatBox";
+import Modal from "../../components/Modal/Modal";
 
 const socket = io("http://localhost:4002");
 const Chat = () => {
-  const { exit, currentUser, chats, setChats, setCurrentChat, setOnlineUsers } =
-    useInfoContext();
+  const {
+    exit,
+    currentUser,
+    chats,
+    setChats,
+    setCurrentChat,
+    setOnlineUsers,
+    open,
+  } = useInfoContext();
 
   useEffect(() => {
     const getChats = async () => {
@@ -85,6 +93,8 @@ const Chat = () => {
           )}
         </div>
       </div>
+
+      {open && <Modal />}
     </div>
   );
 };

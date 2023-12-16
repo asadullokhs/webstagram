@@ -23,7 +23,6 @@ export const Search = () => {
         console.log(error);
         toast.dismiss();
         toast.error(error.response.data.message);
-        console.log(error);
       }
     };
 
