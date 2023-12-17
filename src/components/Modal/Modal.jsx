@@ -2,6 +2,7 @@ import React from "react";
 import "./Modal.css";
 import { useInfoContext } from "../../context/Context";
 import profile from "../../images/default-profile.jpg";
+import cover from "../../images/cover.jpg";
 
 const Modal = () => {
   const { setOpen, userInfo } = useInfoContext();
@@ -20,8 +21,18 @@ const Modal = () => {
               &#10005;
             </button>
           </div>
-          <div className="flex-content">
+          <div className="modal-content">
             <img
+              className="coverPicture"
+              src={
+                userInfo?.coverPicture
+                  ? `http://localhost:4002/${userInfo?.coverPicture} `
+                  : cover
+              }
+              alt="cover-picture"
+            />
+            <img
+              className="profile-image"
               src={
                 userInfo?.profilePicture
                   ? `http://localhost:4002/${userInfo?.profilePicture} `
@@ -30,12 +41,14 @@ const Modal = () => {
               alt="rasm"
             />
             <div className="info">
-              <h1 className="name">
+              <h1 className="name-modal">
                 {userInfo?.firstName} {userInfo?.lastName}
               </h1>
-              <span>{userInfo?.email}</span>
-              <p className="about">{userInfo?.about}</p>
-              <p className="livesIn">{userInfo?.livesIn}</p>
+              <p className="email">Email: {userInfo?.email}</p>
+              <p className="about">About: {userInfo?.about}</p>
+              <p className="livesIn"> Lives In: {userInfo?.livesIn}</p>
+              <p className="country"> Country: {userInfo?.country}</p>
+              <p className="works-at"> Works At: {userInfo?.worksAt}</p>
             </div>
           </div>
         </div>

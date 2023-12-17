@@ -22,7 +22,6 @@ const ChatBox = () => {
       try {
         const { data } = await getUser(userId);
         setUserData(data.user);
-        setUserInfo(data.user);
       } catch (error) {
         if (error.response.data.message === "jwt expired") {
           exit();
@@ -60,6 +59,7 @@ const ChatBox = () => {
           className="profile-img"
           onClick={() => {
             setOpen(true);
+            setUserInfo(userData);
           }}
           src={
             userData?.profilePicture
