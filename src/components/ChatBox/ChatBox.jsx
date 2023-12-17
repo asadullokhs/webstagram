@@ -8,9 +8,10 @@ import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 
 const ChatBox = () => {
-  const { currentUser, currentChat, exit, setOpen, userData, setUserData } =
+  const { currentUser, currentChat, exit, setOpen, setUserInfo } =
     useInfoContext();
   const [messages, setMessages] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   const imageRef = useRef();
 
@@ -21,6 +22,7 @@ const ChatBox = () => {
       try {
         const { data } = await getUser(userId);
         setUserData(data.user);
+        setUserInfo(data.user);
       } catch (error) {
         if (error.response.data.message === "jwt expired") {
           exit();

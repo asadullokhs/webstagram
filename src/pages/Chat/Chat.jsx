@@ -9,6 +9,7 @@ import { getUserChats } from "../../api/chatRequests";
 import Conversation from "../../components/Conversation/Conversation";
 import ChatBox from "../../components/ChatBox/ChatBox";
 import Modal from "../../components/Modal/Modal";
+import chatImg from "../../images/chat.jpg";
 
 const socket = io("http://localhost:4002");
 const Chat = () => {
@@ -20,6 +21,9 @@ const Chat = () => {
     setCurrentChat,
     setOnlineUsers,
     open,
+    setUserInfo,
+    setOpen,
+    currentChat,
   } = useInfoContext();
 
   useEffect(() => {
@@ -55,14 +59,34 @@ const Chat = () => {
 
       {/* Conversations */}
       <div className="middle-side cssanimation blurIn">
-        <ChatBox />
+        {currentChat ? (
+          <ChatBox />
+        ) : (
+          <>
+            <img
+              className="chat-img"
+              width={250}
+              style={{
+                borderRadius: "50%",
+              }}
+              src={chatImg}
+              alt="not found"
+            />
+            <h2 className="chat-title">There's no chat yet</h2>
+          </>
+        )}
       </div>
 
       {/* chat list */}
       <div className="right-side cssanimation blurInLeft  search-user">
         <div className="right-side-top">
           <h1>All chats</h1>
-          <button>
+          <button
+            onClick={() => {
+              setUserInfo(currentUser);
+              setOpen(true);
+            }}
+          >
             <span className="fa-solid fa-gear"></span>
           </button>
           <button

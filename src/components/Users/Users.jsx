@@ -4,14 +4,27 @@ import "./Users.css";
 
 import message from "../../images/message.jpg";
 import profile from "../../images/default-profile.jpg";
+import { getUser } from "../../api/userRequests";
 
 export const Users = ({ users }) => {
-  const { currentUser, onlineUsers } = useInfoContext();
+  const { currentUser, onlineUsers, setUserInfo, setOpen, exit } =
+    useInfoContext();
 
   const online = (userId) => {
     const onlineUser = onlineUsers.find((user) => user.userId === userId);
 
     return onlineUser ? true : false;
+  };
+
+  const getUserData = async (userId) => {
+    try {
+      const { data } = await getUser(userId);
+      setUserInfo(data.user);
+    } catch (error) {
+      if (error.response.data.message === "jwt expired") {
+        exit();
+      }
+    }
   };
 
   return (
@@ -26,6 +39,11 @@ export const Users = ({ users }) => {
                 ></div>
                 <img
                   className="profile-img"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    getUserData(user._id);
+                    setOpen(true);
+                  }}
                   src={
                     user?.profilePicture
                       ? `http://localhost:4002/${user?.profilePicture}`

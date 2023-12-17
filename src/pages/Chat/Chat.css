@@ -17,6 +17,19 @@
     transition: all 0.3s ease;
 }
 
+.chat-img{
+   position: absolute;
+   top: 100px;
+   left: 220px;
+}
+
+.chat-title{
+    color: rgb(75, 121, 78, 0.672);
+    position: absolute;
+    top: 370px;
+    left: 240px;
+}
+
 .chat-item:hover{
     transform: scale(1.1);
 }
