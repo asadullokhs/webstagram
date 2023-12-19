@@ -14,10 +14,12 @@ export const InfoProvider = ({ children }) => {
   const [currentChat, setCurrentChat] = useState(null);
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const [settings, setSettings] = useState(false);
 
   const exit = () => {
     localStorage.clear();
     setCurrentUser(null);
+    setCurrentChat(null);
   };
 
   const value = {
@@ -34,6 +36,8 @@ export const InfoProvider = ({ children }) => {
     setOpen,
     userInfo,
     setUserInfo,
+    settings,
+    setSettings,
   };
 
   return (

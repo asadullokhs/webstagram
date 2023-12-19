@@ -5,10 +5,19 @@ import "./Users.css";
 import message from "../../images/message.jpg";
 import profile from "../../images/default-profile.jpg";
 import { getUser } from "../../api/userRequests";
+import { findChat } from "../../api/chatRequests";
 
 export const Users = ({ users }) => {
-  const { currentUser, onlineUsers, setUserInfo, setOpen, exit } =
-    useInfoContext();
+  const {
+    currentUser,
+    onlineUsers,
+    setUserInfo,
+    setOpen,
+    exit,
+    setCurrentChat,
+    setChats,
+    chats,
+  } = useInfoContext();
 
   const online = (userId) => {
     const onlineUser = onlineUsers.find((user) => user.userId === userId);
@@ -20,6 +29,20 @@ export const Users = ({ users }) => {
     try {
       const { data } = await getUser(userId);
       setUserInfo(data.user);
+    } catch (error) {
+      if (error.response.data.message === "jwt expired") {
+        exit();
+      }
+    }
+  };
+
+  const createChat = async (firstId, secondId) => {
+    try {
+      const { data } = await findChat(firstId, secondId);
+      setCurrentChat(data.chat);
+      if (!chats.some((chat) => chat._id === data.chat._id)) {
+        setChats([...chats, data.chat]);
+      }
     } catch (error) {
       if (error.response.data.message === "jwt expired") {
         exit();
@@ -59,7 +82,12 @@ export const Users = ({ users }) => {
                     {online(user._id) ? "online" : "offline"}
                   </span>
                 </div>
-                <button className="msg-btn button">
+                <button
+                  onClick={() => {
+                    createChat(user._id, currentUser._id);
+                  }}
+                  className="msg-btn button"
+                >
                   <img width={20} src={message} alt="message__icon" />
                 </button>
               </div>

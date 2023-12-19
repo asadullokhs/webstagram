@@ -1,4 +1,7 @@
-
+.chat-body{
+    height: 90vh;
+    overflow: auto;
+}
 .user-info{
     display: flex;
     align-items: center;

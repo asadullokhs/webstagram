@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Chat.css";
 import { io } from "socket.io-client";
 
@@ -10,6 +10,7 @@ import Conversation from "../../components/Conversation/Conversation";
 import ChatBox from "../../components/ChatBox/ChatBox";
 import Modal from "../../components/Modal/Modal";
 import chatImg from "../../images/chat.jpg";
+import Settings from "../../components/Settings/Settings";
 
 const socket = io("http://localhost:4002");
 const Chat = () => {
@@ -21,10 +22,13 @@ const Chat = () => {
     setCurrentChat,
     setOnlineUsers,
     open,
-    setUserInfo,
-    setOpen,
     currentChat,
+    settings,
+    setSettings,
   } = useInfoContext();
+
+  const [sendMessage, setSendMessage] = useState(null);
+  const [answerMessage, setAnswerMessage] = useState(null);
 
   useEffect(() => {
     const getChats = async () => {
@@ -50,6 +54,18 @@ const Chat = () => {
     });
   }, [currentUser._id]);
 
+  useEffect(() => {
+    if (sendMessage !== null) {
+      socket.emit("send-message", sendMessage);
+    }
+  }, [sendMessage]);
+
+  useEffect(() => {
+    socket.on("answer-message", (data) => {
+      setAnswerMessage(data);
+    });
+  }, []);
+
   return (
     <div className="chat-page">
       {/* Search and users lost */}
@@ -60,7 +76,10 @@ const Chat = () => {
       {/* Conversations */}
       <div className="middle-side cssanimation blurIn">
         {currentChat ? (
-          <ChatBox />
+          <ChatBox
+            setSendMessage={setSendMessage}
+            answerMessage={answerMessage}
+          />
         ) : (
           <>
             <img
@@ -83,8 +102,7 @@ const Chat = () => {
           <h1>All chats</h1>
           <button
             onClick={() => {
-              setUserInfo(currentUser);
-              setOpen(true);
+              setSettings(true);
             }}
           >
             <span className="fa-solid fa-gear"></span>
@@ -119,6 +137,7 @@ const Chat = () => {
       </div>
 
       {open && <Modal />}
+      {settings && <Settings />}
     </div>
   );
 };
