@@ -15,7 +15,7 @@ const ChatBox = ({ setSendMessage, answerMessage }) => {
 
   const [textMessage, setTextMessage] = useState("");
 
-  const imageRef = useRef();
+  let imageRef = useRef();
   const scroll = useRef();
 
   useEffect(() => {
@@ -64,13 +64,12 @@ const ChatBox = ({ setSendMessage, answerMessage }) => {
     formDate.append("text", textMessage);
     formDate.append("chatId", currentChat._id);
     formDate.append("createdAt", new Date().getTime());
-    formDate.append("file", imageRef?.current.files[0]);
+
+    // tog'irlash kere
+
+    formDate.append("file", imageRef.current.files[0]);
 
     if (textMessage === "") {
-      return;
-    }
-
-    if (imageRef === "") {
       return;
     }
 
@@ -81,6 +80,8 @@ const ChatBox = ({ setSendMessage, answerMessage }) => {
       setMessages([...messages, data.message]);
 
       setTextMessage("");
+
+      formDate.delete("file");
     } catch (error) {
       if (error.response.data.message === "jwt expired") {
         exit();
