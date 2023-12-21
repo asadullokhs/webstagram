@@ -6,6 +6,7 @@ import profile from "../../images/default-profile.jpg";
 import { addMessage, getMessages } from "../../api/messageRequests";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
+import { toast } from "react-toastify";
 
 const ChatBox = ({ setSendMessage, answerMessage }) => {
   const { currentUser, currentChat, exit, setOpen, setUserInfo } =
@@ -69,7 +70,8 @@ const ChatBox = ({ setSendMessage, answerMessage }) => {
 
     formDate.append("file", imageRef.current.files[0]);
 
-    if (textMessage === "") {
+    if (textMessage === "" && imageRef.current.value == "") {
+      toast.error("Text is required");
       return;
     }
 
@@ -81,9 +83,10 @@ const ChatBox = ({ setSendMessage, answerMessage }) => {
 
       setTextMessage("");
 
+      imageRef.current.value = null;
       formDate.delete("file");
     } catch (error) {
-      if (error.response.data.message === "jwt expired") {
+      if (error?.response?.data.message === "jwt expired") {
         exit();
       }
     }
@@ -156,7 +159,7 @@ const ChatBox = ({ setSendMessage, answerMessage }) => {
       <div className="chat-sender">
         <div
           onClick={() => {
-            imageRef.current.click();
+            imageRef?.current?.click();
           }}
           className="sender-file-btn button fa-solid fa-file"
         ></div>
