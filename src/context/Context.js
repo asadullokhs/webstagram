@@ -40,6 +40,7 @@ export const InfoProvider = ({ children }) => {
     setUserInfo,
     settings,
     setSettings,
+    serverUrl,
   };
 
   return (
