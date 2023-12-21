@@ -20,7 +20,6 @@ export const Search = () => {
         toast.dismiss();
         setUsers(res.data.users);
       } catch (error) {
-        console.log(error);
         toast.dismiss();
         toast.error(error.response.data.message);
       }

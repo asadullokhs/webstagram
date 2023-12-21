@@ -4,7 +4,7 @@ import { useInfoContext } from "../../context/Context";
 import { getUser } from "../../api/userRequests";
 
 const Conversation = ({ chat }) => {
-  const { currentUser, exit, onlineUsers } = useInfoContext();
+  const { currentUser, exit, onlineUsers, serverUrl } = useInfoContext();
 
   const [userData, setUserData] = useState(null);
 
@@ -36,7 +36,7 @@ const Conversation = ({ chat }) => {
         className="profile-img"
         src={
           userData?.profilePicture
-            ? `http://localhost:4002/${userData?.profilePicture}`
+            ? `${serverUrl}/${userData?.profilePicture}`
             : profile
         }
         alt="profile-img"

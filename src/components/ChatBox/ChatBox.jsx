@@ -9,7 +9,7 @@ import InputEmoji from "react-input-emoji";
 import { toast } from "react-toastify";
 
 const ChatBox = ({ setSendMessage, answerMessage }) => {
-  const { currentUser, currentChat, exit, setOpen, setUserInfo } =
+  const { currentUser, currentChat, exit, setOpen, setUserInfo, serverUrl } =
     useInfoContext();
   const [messages, setMessages] = useState([]);
   const [userData, setUserData] = useState(null);
@@ -117,7 +117,7 @@ const ChatBox = ({ setSendMessage, answerMessage }) => {
           }}
           src={
             userData?.profilePicture
-              ? `http://localhost:4002/${userData?.profilePicture}`
+              ? `${serverUrl}/${userData?.profilePicture}`
               : profile
           }
           alt="rasm"
@@ -145,7 +145,7 @@ const ChatBox = ({ setSendMessage, answerMessage }) => {
               {message?.file !== "undefined" ? (
                 <img
                   className="file-message"
-                  src={`http://localhost:4002/${message?.file}`}
+                  src={`${serverUrl}/${message?.file}`}
                   alt={message?.text}
                 />
               ) : (

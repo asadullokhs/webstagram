@@ -6,17 +6,17 @@ const API = axios.create({ baseURL: serverUrl });
 
 export const getMessages = (id) => {
   const token = JSON.parse(localStorage.getItem("token"));
-  return API.get(`/message/${id}`, { headers: { token } });
+  return API.get(`/api/message/${id}`, { headers: { token } });
 };
 
 export const addMessage = (formData) => {
   const token = JSON.parse(localStorage.getItem("token"));
-  return API.post(`/message`, formData, { headers: { token } });
+  return API.post(`/api/message`, formData, { headers: { token } });
 };
 
 export const deleteUser = (messageId) => {
   const token = JSON.parse(localStorage.getItem("token"));
-  return API.delete(`/message/:${messageId}`, { headers: { token } });
+  return API.delete(`/api/message/:${messageId}`, { headers: { token } });
 };
 // export const updateUser = (id, formData) => {
 //   const token = JSON.parse(localStorage.getItem("token"));

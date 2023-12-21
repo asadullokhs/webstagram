@@ -5,7 +5,7 @@ import profile from "../../images/default-profile.jpg";
 import cover from "../../images/cover.jpg";
 
 const Modal = () => {
-  const { setOpen, userInfo } = useInfoContext();
+  const { setOpen, userInfo, serverUrl } = useInfoContext();
 
   return (
     <div>
@@ -26,7 +26,7 @@ const Modal = () => {
               className="coverPicture"
               src={
                 userInfo?.coverPicture
-                  ? `http://localhost:4002/${userInfo?.coverPicture} `
+                  ? `${serverUrl}/${userInfo?.coverPicture} `
                   : cover
               }
               alt="cover-picture"
@@ -35,7 +35,7 @@ const Modal = () => {
               className="profile-image"
               src={
                 userInfo?.profilePicture
-                  ? `http://localhost:4002/${userInfo?.profilePicture} `
+                  ? `${serverUrl}/${userInfo?.profilePicture} `
                   : profile
               }
               alt="rasm"

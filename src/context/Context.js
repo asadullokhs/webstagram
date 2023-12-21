@@ -16,6 +16,8 @@ export const InfoProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [settings, setSettings] = useState(false);
 
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+
   const exit = () => {
     localStorage.clear();
     setCurrentUser(null);

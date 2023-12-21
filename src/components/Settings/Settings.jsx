@@ -4,7 +4,7 @@ import profile from "../../images/default-profile.jpg";
 import cover from "../../images/cover.jpg";
 
 const Settings = () => {
-  const { setSettings, currentUser } = useInfoContext();
+  const { setSettings, currentUser, serverUrl } = useInfoContext();
   return (
     <div className="modal-box">
       <div className="modal-body">
@@ -32,7 +32,7 @@ const Settings = () => {
             className="profile-image"
             src={
               currentUser?.profilePicture
-                ? `http://localhost:4002/${currentUser?.profilePicture} `
+                ? `${serverUrl}/${currentUser?.profilePicture} `
                 : profile
             }
             alt="rasm"

@@ -6,15 +6,15 @@ const API = axios.create({ baseURL: serverUrl });
 
 export const getUserChats = () => {
   const token = JSON.parse(localStorage.getItem("token"));
-  return API.get(`/chat`, { headers: { token } });
+  return API.get(`/api/chat`, { headers: { token } });
 };
 
 export const findChat = (firstId, secondId) => {
   const token = JSON.parse(localStorage.getItem("token"));
-  return API.get(`/chat/${firstId}/${secondId}`, { headers: { token } });
+  return API.get(`/api/chat/${firstId}/${secondId}`, { headers: { token } });
 };
 
 export const deleteChat = (chatId) => {
   const token = JSON.parse(localStorage.getItem("token"));
-  API.delete(`/chat/${chatId}`, { headers: { token } });
+  API.delete(`/api/chat/${chatId}`, { headers: { token } });
 };
