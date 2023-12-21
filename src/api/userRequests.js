@@ -4,9 +4,9 @@ const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 const API = axios.create({ baseURL: serverUrl });
 
-export const getAllUsers = () => API.get(`/user`);
+export const getAllUsers = () => API.get(`/api/user`);
 
-export const getUser = (id) => API.get(`/user/${id}`);
+export const getUser = (id) => API.get(`/api/user/${id}`);
 
 export const updateUser = (id, formData) => {
   const token = JSON.parse(localStorage.getItem("token"));

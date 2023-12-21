@@ -23,7 +23,7 @@ const Settings = () => {
             className="coverPicture"
             src={
               currentUser?.coverPicture
-                ? `http://localhost:4002/${currentUser?.coverPicture} `
+                ? `${serverUrl}/${currentUser?.coverPicture} `
                 : cover
             }
             alt="cover-picture"

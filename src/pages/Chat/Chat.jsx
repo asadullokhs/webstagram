@@ -12,9 +12,7 @@ import Modal from "../../components/Modal/Modal";
 import chatImg from "../../images/chat.jpg";
 import Settings from "../../components/Settings/Settings";
 
-const serverUrl = process.env.REACT_APP_SERVER_URL;
-
-const socket = io(serverUrl);
+const socket = io("https://chat-app-production-1e85.up.railway.app");
 const Chat = () => {
   const {
     exit,
@@ -38,7 +36,7 @@ const Chat = () => {
         const res = await getUserChats();
         setChats(res.data.chats);
       } catch (error) {
-        if (error.response.data.message === "jwt expired") {
+        if (error?.response?.data.message === "jwt expired") {
           exit();
         }
       }
