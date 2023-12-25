@@ -66,8 +66,6 @@ const ChatBox = ({ setSendMessage, answerMessage }) => {
     formDate.append("chatId", currentChat._id);
     formDate.append("createdAt", new Date().getTime());
 
-    // tog'irlash kere
-
     formDate.append("file", imageRef.current.files[0]);
 
     if (textMessage === "" && imageRef.current.value == "") {
@@ -163,7 +161,7 @@ const ChatBox = ({ setSendMessage, answerMessage }) => {
           }}
           className="sender-file-btn button fa-solid fa-file"
         ></div>
-        <InputEmoji value={textMessage} onChange={handleText} />
+        <InputEmoji keepOpened value={textMessage} onChange={handleText} />
         <button
           onClick={handleSend}
           className="send-btn button fa-solid fa-paper-plane"
