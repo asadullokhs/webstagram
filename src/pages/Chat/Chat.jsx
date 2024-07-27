@@ -12,7 +12,7 @@ import Modal from "../../components/Modal/Modal";
 import chatImg from "../../images/chat.jpg";
 import Settings from "../../components/Settings/Settings";
 
-const socket = io("https://chat-app-production-1e85.up.railway.app");
+const socket = io("https://chat-app-c0b7.onrender.com");
 const Chat = () => {
   const {
     exit,
